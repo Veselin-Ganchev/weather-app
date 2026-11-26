@@ -1,5 +1,9 @@
-//Declare constants for weather descriptions based on weather codes
-const weatherDescriptions = {
+import type {
+  ForecastResponse,
+  HourlyForecastHour,
+} from '../types.ts'
+
+const weatherDescriptions: Record<number, string> = {
   0: 'Clear sky',
   1: 'Mainly clear',
   2: 'Partly cloudy',
@@ -30,25 +34,28 @@ const weatherDescriptions = {
   99: 'Thunderstorm',
 }
 
-export function getWeatherDescription(code) {
+export function getWeatherDescription(code: number): string {
   return weatherDescriptions[code] ?? 'Weather unavailable'
 }
 
-export function getHumidityDescription(humidity) {
+export function getHumidityDescription(humidity: number): string {
   if (humidity >= 80) return 'Very humid air'
   if (humidity >= 60) return 'Humid conditions'
   if (humidity <= 30) return 'Dry air'
   return 'Comfortable humidity'
 }
 
-export function getWindDescription(speed) {
+export function getWindDescription(speed: number): string {
   if (speed >= 40) return 'Strong winds'
   if (speed >= 20) return 'Breezy conditions'
   if (speed >= 8) return 'Light breeze'
   return 'Calm conditions'
 }
 
-export function getTemperatureRangeStyle(minimum, maximum) {
+export function getTemperatureRangeStyle(
+  minimum: number,
+  maximum: number,
+): { left: string; width: string } {
   const scaleMinimum = -20
   const scaleRange = 65
   const width = Math.min(100, Math.max(5, ((maximum - minimum) / scaleRange) * 100))
@@ -59,13 +66,16 @@ export function getTemperatureRangeStyle(minimum, maximum) {
   }
 }
 
-export function formatDateLabel(date, options) {
+export function formatDateLabel(
+  date: string,
+  options: Intl.DateTimeFormatOptions,
+): string {
   return new Intl.DateTimeFormat('en', { timeZone: 'UTC', ...options }).format(
     new Date(`${date}T12:00:00Z`),
   )
 }
 
-export function formatCurrentDate(currentTime) {
+export function formatCurrentDate(currentTime: string): string {
   const date = currentTime.split('T')[0]
 
   return formatDateLabel(date, {
@@ -75,7 +85,7 @@ export function formatCurrentDate(currentTime) {
   })
 }
 
-export function formatHourLabel(hour) {
+export function formatHourLabel(hour: string): string {
   return new Intl.DateTimeFormat('en', {
     hour: 'numeric',
     hour12: true,
@@ -85,7 +95,9 @@ export function formatHourLabel(hour) {
     .replace(' ', '')
 }
 
-export function getHourlyForecast(forecast) {
+export function getHourlyForecast(
+  forecast: ForecastResponse | null | undefined,
+): HourlyForecastHour[] {
   const { current, hourly } = forecast ?? {}
   if (!current || !hourly?.time) return []
 
@@ -103,3 +115,4 @@ export function getHourlyForecast(forecast) {
     }
   })
 }
+

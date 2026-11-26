@@ -3,7 +3,15 @@ const snowyCodes = new Set([71, 73, 75, 77, 85, 86])
 const foggyCodes = new Set([45, 48])
 const clearCodes = new Set([0, 1])
 
-function WeatherIcon({ code, isDay = true, className = '' }) {
+function WeatherIcon({
+  code,
+  isDay = true,
+  className = '',
+}: {
+  code: number
+  isDay?: boolean
+  className?: string
+}) {
   const isRainy = rainyCodes.has(code)
   const isSnowy = snowyCodes.has(code)
   const isCloudy = code !== 0 && !foggyCodes.has(code)

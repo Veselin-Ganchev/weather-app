@@ -1,6 +1,7 @@
-import { getWeatherDescription } from '../utils/weatherUtils.js'
-import LocationPinIcon from './LocationPinIcon.jsx'
-import WeatherIcon from './WeatherIcon.jsx'
+import { getWeatherDescription } from '../utils/weatherUtils.ts'
+import type { CurrentWeather, WeatherLocation } from '../types.ts'
+import LocationPinIcon from './LocationPinIcon.tsx'
+import WeatherIcon from './WeatherIcon.tsx'
 
 function CurrentWeatherCard({
   location,
@@ -9,11 +10,18 @@ function CurrentWeatherCard({
   error,
   isLoading,
   onRetry,
+}: {
+  location: WeatherLocation
+  dateLabel: string
+  current: CurrentWeather | undefined
+  error: string
+  isLoading: boolean
+  onRetry: () => void
 }) {
   return (
     <section
       aria-label={`Weather in ${location.name}`}
-      className={`weather-hero ${current?.weather_code >= 3 ? 'is-overcast' : ''}`}
+      className={`weather-hero ${(current?.weather_code ?? 0) >= 3 ? 'is-overcast' : ''}`}
     >
       <div className="hero-copy">
         <div className="location-label">
@@ -45,7 +53,7 @@ function CurrentWeatherCard({
             <p className="hero-condition">
               {isLoading
                 ? 'Getting your forecast...'
-                : getWeatherDescription(current?.weather_code)}
+                : getWeatherDescription(current?.weather_code ?? -1)}
             </p>
             <p className="feels-like">
               Feels like{' '}

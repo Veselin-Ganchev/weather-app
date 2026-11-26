@@ -1,7 +1,14 @@
-import { formatHourLabel } from '../utils/weatherUtils.js'
-import WeatherIcon from './WeatherIcon.jsx'
+import { formatHourLabel } from '../utils/weatherUtils.ts'
+import type { HourlyForecastHour } from '../types.ts'
+import WeatherIcon from './WeatherIcon.tsx'
 
-function HourlyForecast({ hours, isDay }) {
+function HourlyForecast({
+  hours,
+  isDay,
+}: {
+  hours: HourlyForecastHour[]
+  isDay: boolean
+}) {
   return (
     <section aria-labelledby="hourly-title" className="forecast-section hourly-section">
       <div className="section-heading">
