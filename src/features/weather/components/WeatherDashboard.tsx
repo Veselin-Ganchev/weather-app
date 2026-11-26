@@ -1,25 +1,26 @@
 import { useState } from 'react'
-import { DEFAULT_LOCATION } from '../constants.js'
-import useForecast from '../hooks/useForecast.js'
+import { DEFAULT_LOCATION } from '../constants.ts'
+import useForecast from '../hooks/useForecast.ts'
 import {
   formatCurrentDate,
   getHourlyForecast,
-} from '../utils/weatherUtils.js'
-import CurrentWeatherCard from './CurrentWeatherCard.jsx'
-import HourlyForecast from './HourlyForecast.jsx'
-import LocationSearch from './LocationSearch.jsx'
-import WeatherDetails from './WeatherDetails.jsx'
-import WeeklyForecast from './WeeklyForecast.jsx'
+} from '../utils/weatherUtils.ts'
+import type { GeocodingLocation, WeatherLocation } from '../types.ts'
+import CurrentWeatherCard from './CurrentWeatherCard.tsx'
+import HourlyForecast from './HourlyForecast.tsx'
+import LocationSearch from './LocationSearch.tsx'
+import WeatherDetails from './WeatherDetails.tsx'
+import WeeklyForecast from './WeeklyForecast.tsx'
 import '../weather.css'
 
 function WeatherDashboard() {
-  const [location, setLocation] = useState(DEFAULT_LOCATION)
+  const [location, setLocation] = useState<WeatherLocation>(DEFAULT_LOCATION)
   const { forecast, error, isLoading, retry } = useForecast(location)
   const current = forecast?.current
   const hourlyForecast = getHourlyForecast(forecast)
   const dateLabel = current ? formatCurrentDate(current.time) : ''
 
-  function selectLocation(place) {
+  function selectLocation(place: GeocodingLocation) {
     setLocation({
       id: `${place.latitude}-${place.longitude}`,
       name: place.name,

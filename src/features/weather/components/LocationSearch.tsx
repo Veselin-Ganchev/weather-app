@@ -1,17 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
-import useLocationSearch from '../hooks/useLocationSearch.js'
-import LocationPinIcon from './LocationPinIcon.jsx'
-import SearchIcon from './SearchIcon.jsx'
+import type { KeyboardEvent } from 'react'
+import useLocationSearch from '../hooks/useLocationSearch.ts'
+import type { GeocodingLocation } from '../types.ts'
+import LocationPinIcon from './LocationPinIcon.tsx'
+import SearchIcon from './SearchIcon.tsx'
 
-function LocationSearch({ onSelectLocation }) {
+function LocationSearch({
+  onSelectLocation,
+}: {
+  onSelectLocation: (place: GeocodingLocation) => void
+}) {
   const [query, setQuery] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [activeSuggestion, setActiveSuggestion] = useState(-1)
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const { suggestions, isSearching, error } = useLocationSearch(query, isOpen)
 
   useEffect(() => {
-    function focusSearch(event) {
+    function focusSearch(event: globalThis.KeyboardEvent) {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault()
         inputRef.current?.focus()
@@ -22,14 +28,14 @@ function LocationSearch({ onSelectLocation }) {
     return () => window.removeEventListener('keydown', focusSearch)
   }, [])
 
-  function chooseLocation(place) {
+  function chooseLocation(place: GeocodingLocation) {
     onSelectLocation(place)
     setQuery('')
     setIsOpen(false)
     setActiveSuggestion(-1)
   }
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'ArrowDown' && suggestions.length) {
       event.preventDefault()
       setActiveSuggestion((current) => (current + 1) % suggestions.length)

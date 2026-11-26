@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
-import { fetchForecast } from '../api/forecastApi.js'
+import { fetchForecast } from '../api/forecastApi.ts'
+import type { ForecastResponse, WeatherLocation } from '../types.ts'
 
-function useForecast(location) {
-  const [forecast, setForecast] = useState(null)
+function useForecast(location: WeatherLocation) {
+  const [forecast, setForecast] = useState<ForecastResponse | null>(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [reloadKey, setReloadKey] = useState(0)
@@ -19,7 +20,7 @@ function useForecast(location) {
         const data = await fetchForecast(location, { signal: controller.signal })
         setForecast(data)
       } catch (requestError) {
-        if (requestError.name !== 'AbortError') {
+        if (!(requestError instanceof Error && requestError.name === 'AbortError')) {
           setError(
             requestError instanceof Error
               ? requestError.message
