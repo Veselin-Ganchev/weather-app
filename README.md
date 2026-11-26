@@ -17,4 +17,4 @@ npm run dev
 ```
 
 Run `npm run lint` to check the code or `npm run build` to create a production
-build.
+build. Run `npm run typecheck` to validate TypeScript types.

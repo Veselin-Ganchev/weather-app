@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react'
-import { searchLocations } from '../api/locationApi.js'
+import { searchLocations } from '../api/locationApi.ts'
+import type { GeocodingLocation } from '../types.ts'
 
-function useLocationSearch(query, isEnabled) {
-  const [searchState, setSearchState] = useState({
+function useLocationSearch(query: string, isEnabled: boolean) {
+  const [searchState, setSearchState] = useState<{
+    query: string
+    places: GeocodingLocation[]
+    error: string
+    isLoading: boolean
+  }>({
     query: '',
     places: [],
     error: '',

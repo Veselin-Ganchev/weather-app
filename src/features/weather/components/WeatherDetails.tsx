@@ -1,9 +1,16 @@
 import {
   getHumidityDescription,
   getWindDescription,
-} from '../utils/weatherUtils.js'
+} from '../utils/weatherUtils.ts'
+import type { CurrentWeather } from '../types.ts'
 
-function WeatherDetails({ current, precipitationChance = 0 }) {
+function WeatherDetails({
+  current,
+  precipitationChance = 0,
+}: {
+  current: CurrentWeather | undefined
+  precipitationChance?: number
+}) {
   return (
     <section aria-label="Weather details" className="details-grid">
       <article className="detail-card">

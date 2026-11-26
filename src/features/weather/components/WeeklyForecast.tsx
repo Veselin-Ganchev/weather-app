@@ -2,10 +2,11 @@ import {
   formatDateLabel,
   getTemperatureRangeStyle,
   getWeatherDescription,
-} from '../utils/weatherUtils.js'
-import WeatherIcon from './WeatherIcon.jsx'
+} from '../utils/weatherUtils.ts'
+import type { DailyForecastData } from '../types.ts'
+import WeatherIcon from './WeatherIcon.tsx'
 
-function WeeklyForecast({ daily }) {
+function WeeklyForecast({ daily }: { daily: DailyForecastData | undefined }) {
   return (
     <section aria-labelledby="week-title" className="forecast-section week-section">
       <div className="section-heading">
