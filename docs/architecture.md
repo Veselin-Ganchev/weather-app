@@ -87,9 +87,9 @@ easy to trace.
    `components/`, and pure domain logic in `utils/`.
 3. Keep feature-specific styles with the feature. Put styles in `index.css` only
    when they are truly global.
-4. Add tests beside the code they cover (for example,
-   `useForecast.test.ts` or `WeatherDetails.test.tsx`) when a test runner is
-   introduced.
+4. Add focused tests beside the code they cover (for example,
+   `useForecast.test.ts` or `WeatherDetails.test.tsx`) and run them with
+   `npm test`.
 5. Promote a component or utility to `src/shared/` only when multiple features
    need the same general-purpose behavior. Avoid creating abstractions for
    single-use code.
