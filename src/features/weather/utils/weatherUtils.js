@@ -1,3 +1,4 @@
+//Declare constants for weather descriptions based on weather codes
 const weatherDescriptions = {
   0: 'Clear sky',
   1: 'Mainly clear',
