@@ -18,3 +18,7 @@ npm run dev
 
 Run `npm run lint` to check the code or `npm run build` to create a production
 build. Run `npm run typecheck` to validate TypeScript types.
+
+Run `npm test` for the unit test suite and a V8 coverage summary in the console.
+An HTML coverage report is written to `coverage/`. Use `npm run test:watch`
+while developing.
