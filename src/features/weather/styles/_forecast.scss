@@ -1,0 +1,254 @@
+.forecast-section {
+  padding: 24px;
+}
+
+.hourly-section {
+  grid-column: 1;
+}
+
+.week-section {
+  grid-column: 2;
+  padding-bottom: 8px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 22px;
+
+  h2 {
+    margin: 7px 0 0;
+    color: var(--ink);
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+  }
+}
+
+.eyebrow {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.week-range {
+  padding-bottom: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.unit-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  padding: 4px;
+  border-radius: 9px;
+  background: var(--soft);
+
+  button {
+    min-width: 40px;
+    min-height: 38px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background: var(--card);
+      color: var(--ink);
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgb(33 48 39 / 9%);
+    }
+  }
+}
+
+.hourly-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.hour-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  padding: 16px 5px 13px;
+  border-radius: 13px;
+  background: var(--soft);
+  color: var(--ink);
+
+  &.current-hour {
+    background: #eef0df;
+    color: #3b4935;
+  }
+
+  > strong {
+    color: inherit;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+  }
+}
+
+:root[data-theme='dark'] .hour-card.current-hour {
+  background: #344036;
+  color: var(--ink);
+}
+
+.hour-time {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.current-hour .hour-time {
+  color: inherit;
+  font-weight: 600;
+}
+
+.weather-icon {
+  overflow: visible;
+}
+
+.hour-weather-icon {
+  width: 31px;
+  height: 31px;
+}
+
+.day-weather-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.icon-sun {
+  fill: #efce6a;
+}
+
+.icon-sun-rays {
+  stroke: #b49c54;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.icon-cloud {
+  fill: #8da399;
+  stroke: #8da399;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.icon-rain,
+.icon-snow {
+  stroke: #789c95;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.icon-snow {
+  stroke: #87a89c;
+}
+
+.icon-lightning {
+  fill: #d6bf73;
+  stroke: #d6bf73;
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.icon-moon {
+  fill: #d6bf73;
+}
+
+.weather-icon-placeholder {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: var(--soft);
+}
+
+.hour-rain {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.week-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-row {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: minmax(76px, 1.1fr) 28px minmax(58px, 1fr) minmax(100px, 1.1fr);
+  align-items: center;
+  gap: 7px;
+  border-top: 1px solid var(--line);
+}
+
+.day-name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  strong {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  small {
+    color: var(--muted);
+    font-size: 10px;
+  }
+}
+
+.day-condition {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.temperature-range {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+
+  strong {
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  i {
+    position: relative;
+    width: 35px;
+    height: 4px;
+    overflow: visible;
+    border-radius: 8px;
+    background: var(--soft);
+
+    b {
+      position: absolute;
+      top: 0;
+      height: 4px;
+      border-radius: inherit;
+      background: #d6bf73;
+    }
+  }
+}

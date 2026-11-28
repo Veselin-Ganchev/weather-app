@@ -54,7 +54,12 @@ function CurrentWeatherCard({
               {isLoading || !current ? (
                 <span aria-label="Loading temperature" className="temperature-skeleton" />
               ) : (
-                <span className="hero-temperature">{temperature}°</span>
+                <span
+                  className="hero-temperature"
+                  key={`${location.id}-${unit}-${temperature}`}
+                >
+                  {temperature}°
+                </span>
               )}
               {current && (
                 <WeatherIcon

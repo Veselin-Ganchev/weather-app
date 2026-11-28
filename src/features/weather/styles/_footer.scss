@@ -1,0 +1,23 @@
+.app-footer {
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 12px;
+
+  > span:first-child span {
+    padding-left: 2px;
+    color: #a38b43;
+  }
+
+  a {
+    color: var(--green);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

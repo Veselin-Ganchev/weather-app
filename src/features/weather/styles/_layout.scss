@@ -1,0 +1,10 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(100%, 1440px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+}

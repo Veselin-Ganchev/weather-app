@@ -1,0 +1,202 @@
+@use '../../../styles/tokens' as tokens;
+
+@media (max-width: tokens.$breakpoint-desktop) {
+  .hourly-section,
+  .week-section {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: tokens.$breakpoint-tablet) {
+  .topbar {
+    min-height: 86px;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .topbar-right {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .search-wrap {
+    order: 2;
+    width: min(100%, 320px);
+  }
+
+  .today-label {
+    display: none;
+  }
+
+  .weather-hero {
+    min-height: 370px;
+  }
+
+  .hero-copy {
+    width: 70%;
+    padding: 30px 28px 105px;
+  }
+
+  .hero-footer {
+    right: 28px;
+    left: 28px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .detail-card {
+    min-height: 160px;
+  }
+
+  .forecast-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 38rem) {
+  .app-shell {
+    padding: 0 16px;
+  }
+
+  .brand {
+    font-size: 24px;
+  }
+
+  .topbar {
+    align-items: center;
+  }
+
+  .topbar-right {
+    width: 100%;
+  }
+
+  .search-wrap {
+    order: initial;
+    width: calc(100% - 104px);
+  }
+
+  .search-box {
+    height: 44px;
+  }
+
+  .search-box kbd {
+    display: none;
+  }
+
+  .theme-toggle {
+    padding: 3px;
+
+    button {
+      width: 34px;
+      height: 34px;
+    }
+  }
+
+  main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .weather-hero {
+    min-height: 340px;
+    grid-column: 1;
+    border-radius: 19px;
+  }
+
+  .hero-copy {
+    width: 78%;
+    padding: 25px 22px 100px;
+  }
+
+  .temperature-line {
+    min-height: 110px;
+  }
+
+  .hero-temperature {
+    font-size: 82px;
+  }
+
+  .hero-weather-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .hero-condition {
+    font-size: 21px;
+  }
+
+  .hero-footer {
+    right: 22px;
+    left: 22px;
+    font-size: 10px;
+  }
+
+  .details-grid {
+    grid-column: 1;
+  }
+
+  .detail-card {
+    min-height: 158px;
+    padding: 19px;
+  }
+
+  .forecast-section,
+  .hourly-section,
+  .week-section {
+    grid-column: 1;
+  }
+
+  .section-heading {
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  .hourly-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .hour-card {
+    padding: 13px 4px;
+  }
+
+  .day-row {
+    grid-template-columns: minmax(64px, 1fr) 25px minmax(58px, 1fr) minmax(93px, 1.2fr);
+    gap: 5px;
+  }
+
+  .temperature-range {
+    gap: 4px;
+
+    i {
+      width: 24px;
+    }
+  }
+
+  .app-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 18px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .temperature-skeleton {
+    animation: none;
+  }
+}

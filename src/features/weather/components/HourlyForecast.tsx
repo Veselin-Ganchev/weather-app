@@ -29,6 +29,7 @@ function HourlyForecast({
           <article
             className={`hour-card ${index === 0 ? 'current-hour' : ''}`}
             key={hour.time}
+            style={{ animationDelay: `${index * 70}ms` }}
           >
             <span className="hour-time">
               {index === 0 ? 'Now' : formatHourLabel(hour.time)}
@@ -38,7 +39,9 @@ function HourlyForecast({
               code={hour.weatherCode}
               isDay={isDay}
             />
-            <strong>{convertTemperature(hour.temperature, unit)}°</strong>
+            <strong key={`${hour.time}-${unit}`}>
+              {convertTemperature(hour.temperature, unit)}°
+            </strong>
             <span className="hour-rain">↓ {hour.precipitation ?? 0}%</span>
           </article>
         )) : Array.from({ length: 6 }, (_, index) => (

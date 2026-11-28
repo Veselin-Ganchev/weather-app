@@ -1,0 +1,207 @@
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes rainfall {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-1px, 2px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes fill-bar {
+  from {
+    transform: scaleX(0.05);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes weather-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .topbar,
+  .weather-hero,
+  .hero-temperature,
+  .hourly-section,
+  .week-section,
+  .suggestions {
+    animation: arrive 600ms both;
+  }
+
+  .weather-hero {
+    animation-delay: 50ms;
+  }
+
+  .hourly-section {
+    animation-delay: 140ms;
+  }
+
+  .week-section {
+    animation-delay: 200ms;
+  }
+
+  .detail-card,
+  .hour-card,
+  .day-row {
+    animation: arrive 500ms both;
+  }
+
+  .hero-sun {
+    animation: breathe 6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .hero-sun-rings {
+    animation: breathe 8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .hero-cloud-back {
+    animation: drift 12s ease-in-out infinite;
+    transform-box: fill-box;
+  }
+
+  .hero-cloud-front {
+    animation: drift 10s ease-in-out infinite reverse;
+    transform-box: fill-box;
+  }
+
+  .brand-mark svg,
+  .theme-toggle button[aria-label='Use light theme'] svg {
+    animation: weather-turn 45s linear infinite;
+    transform-origin: center;
+  }
+
+  .live-dot {
+    animation: breathe 2.4s ease-in-out infinite;
+  }
+
+  .meter span {
+    animation: fill-bar 800ms ease-out both;
+    transform-origin: left center;
+  }
+
+  .weather-icon--sun .icon-sun-rays-group {
+    animation: weather-turn 30s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .weather-icon--cloud .icon-cloud,
+  .weather-icon--moon .icon-moon {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .weather-icon--fog .icon-fog {
+    animation: drift 5s ease-in-out infinite;
+  }
+
+  .weather-icon--rain .icon-rain {
+    animation: rainfall 900ms ease-in-out infinite;
+  }
+
+  .weather-icon--snow .icon-snow {
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  .detail-card,
+  .hour-card {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .detail-card:hover,
+  .hour-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgb(42 54 44 / 9%);
+  }
+
+  .day-row {
+    transition: background-color 180ms ease;
+  }
+
+  .day-row:hover {
+    background: var(--soft);
+  }
+}
+
+.app-shell[data-motion-paused='true'] *,
+.app-shell[data-motion-paused='true'] *::before,
+.app-shell[data-motion-paused='true'] *::after {
+  animation-play-state: paused !important;
+}
+
+.motion-toggle {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+
+  &:hover {
+    border-color: var(--green);
+    color: var(--ink);
+  }
+}

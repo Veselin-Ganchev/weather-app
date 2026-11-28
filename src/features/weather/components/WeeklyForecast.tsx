@@ -25,7 +25,11 @@ function WeeklyForecast({
       </div>
       <div className="week-list">
         {daily?.time.map((date, index) => (
-          <article className="day-row" key={date}>
+          <article
+            className="day-row"
+            key={date}
+            style={{ animationDelay: `${index * 60}ms` }}
+          >
             <span className="day-name">
               <strong>
                 {index === 0 ? 'Today' : formatDateLabel(date, { weekday: 'long' })}
