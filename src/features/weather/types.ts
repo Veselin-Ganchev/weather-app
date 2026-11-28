@@ -7,6 +7,8 @@ export interface WeatherLocation {
   longitude: number
 }
 
+export type TemperatureUnit = 'C' | 'F'
+
 export interface GeocodingLocation extends Omit<WeatherLocation, 'id'> {
   id: number
 }

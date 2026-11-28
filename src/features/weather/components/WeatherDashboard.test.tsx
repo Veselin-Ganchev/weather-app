@@ -17,6 +17,8 @@ const fetchForecastMock = vi.mocked(fetchForecast)
 const searchLocationsMock = vi.mocked(searchLocations)
 
 beforeEach(() => {
+  window.localStorage.clear()
+  document.documentElement.removeAttribute('data-theme')
   fetchForecastMock.mockReset().mockResolvedValue(testForecast)
   searchLocationsMock.mockReset().mockResolvedValue(testPlaces)
 })
@@ -79,5 +81,20 @@ describe('WeatherDashboard', () => {
       await screen.findByRole('region', { name: 'Weather in Berlin' }),
     ).toBeInTheDocument()
     expect(fetchForecastMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('switches temperature units and color themes', async () => {
+    render(<WeatherDashboard />)
+
+    const weatherRegion = await screen.findByRole('region', {
+      name: 'Weather in Berlin',
+    })
+    fireEvent.click(screen.getByRole('button', { name: 'Show Fahrenheit' }))
+    expect(within(weatherRegion).getByText('65°')).toBeInTheDocument()
+    expect(within(weatherRegion).getByText(/Feels like/)).toHaveTextContent('64°')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Use dark theme' }))
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
+    expect(window.localStorage.getItem('daylight-theme')).toBe('dark')
   })
 })

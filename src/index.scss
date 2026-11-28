@@ -1,0 +1,80 @@
+@use './styles/tokens' as tokens;
+
+:root {
+  color-scheme: light;
+  font-family: tokens.$font-family-sans;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+
+  --page: #{tokens.$color-page-light};
+  --card: #{tokens.$color-card-light};
+  --ink: #{tokens.$color-ink-light};
+  --muted: #{tokens.$color-muted-light};
+  --line: #{tokens.$color-line-light};
+  --soft: #{tokens.$color-soft-light};
+  --accent: #{tokens.$color-accent};
+  --accent-ink: #{tokens.$color-accent-ink};
+  --green: #{tokens.$color-green};
+
+  color: var(--ink);
+  background: var(--page);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #{tokens.$color-page-dark};
+  --card: #{tokens.$color-card-dark};
+  --ink: #{tokens.$color-ink-dark};
+  --muted: #{tokens.$color-muted-dark};
+  --line: #{tokens.$color-line-dark};
+  --soft: #{tokens.$color-soft-dark};
+  --green: #9ab19d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--page);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b3be97;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: tokens.$color-ink-light;
+  background: #edcf70;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

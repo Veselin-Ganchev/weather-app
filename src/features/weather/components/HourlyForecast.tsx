@@ -1,13 +1,19 @@
 import { formatHourLabel } from '../utils/weatherUtils.ts'
-import type { HourlyForecastHour } from '../types.ts'
+import type { HourlyForecastHour, TemperatureUnit } from '../types.ts'
 import WeatherIcon from './WeatherIcon.tsx'
+import TemperatureUnitToggle from '../../../components/TemperatureUnitToggle.tsx'
+import { convertTemperature } from '../utils/weatherUtils.ts'
 
 function HourlyForecast({
   hours,
   isDay,
+  unit,
+  onUnitChange,
 }: {
   hours: HourlyForecastHour[]
   isDay: boolean
+  unit: TemperatureUnit
+  onUnitChange: (unit: TemperatureUnit) => void
 }) {
   return (
     <section aria-labelledby="hourly-title" className="forecast-section hourly-section">
@@ -16,7 +22,7 @@ function HourlyForecast({
           <span className="eyebrow">YOUR DAY, HOUR BY HOUR</span>
           <h2 id="hourly-title">Today&apos;s forecast</h2>
         </div>
-        <span className="section-unit">Temperature <span>°C</span></span>
+        <TemperatureUnitToggle unit={unit} onChange={onUnitChange} />
       </div>
       <div className="hourly-list">
         {hours.length ? hours.map((hour, index) => (
@@ -32,7 +38,7 @@ function HourlyForecast({
               code={hour.weatherCode}
               isDay={isDay}
             />
-            <strong>{Math.round(hour.temperature)}°</strong>
+            <strong>{convertTemperature(hour.temperature, unit)}°</strong>
             <span className="hour-rain">↓ {hour.precipitation ?? 0}%</span>
           </article>
         )) : Array.from({ length: 6 }, (_, index) => (
