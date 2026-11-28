@@ -30,7 +30,7 @@ function WeatherDetails({
 }) {
   return (
     <section aria-label="Weather details" className="details-grid">
-      <article className="detail-card">
+      <article className="detail-card" style={{ animationDelay: '0ms' }}>
         <div className="detail-card-heading">
           <span className="detail-icon humidity-icon"><MetricIcon name="humidity" /></span>
           <span>Humidity</span>
@@ -45,7 +45,7 @@ function WeatherDetails({
           <span style={{ width: `${current?.relative_humidity_2m ?? 0}%` }} />
         </div>
       </article>
-      <article className="detail-card">
+      <article className="detail-card" style={{ animationDelay: '90ms' }}>
         <div className="detail-card-heading">
           <span className="detail-icon wind-icon"><MetricIcon name="wind" /></span>
           <span>Wind speed</span>
@@ -60,7 +60,7 @@ function WeatherDetails({
         </span>
         <div aria-hidden="true" className="wind-decoration"><i /><i /><i /></div>
       </article>
-      <article className="detail-card">
+      <article className="detail-card" style={{ animationDelay: '180ms' }}>
         <div className="detail-card-heading">
           <span className="detail-icon rain-icon"><MetricIcon name="precipitation" /></span>
           <span>Precipitation</span>

@@ -97,4 +97,24 @@ describe('WeatherDashboard', () => {
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(window.localStorage.getItem('daylight-theme')).toBe('dark')
   })
+
+  it('pauses and resumes weather animations accessibly', () => {
+    render(<WeatherDashboard />)
+
+    const app = document.querySelector('.app-shell')
+    const pauseButton = screen.getByRole('button', { name: 'Pause animations' })
+
+    expect(app).toHaveAttribute('data-motion-paused', 'false')
+    expect(pauseButton).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(pauseButton)
+
+    expect(app).toHaveAttribute('data-motion-paused', 'true')
+    expect(screen.getByRole('button', { name: 'Resume animations' }))
+      .toHaveAttribute('aria-pressed', 'true')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Resume animations' }))
+
+    expect(app).toHaveAttribute('data-motion-paused', 'false')
+  })
 })

@@ -1,0 +1,126 @@
+@use '../../../styles/tokens' as tokens;
+
+.search-wrap {
+  position: relative;
+  z-index: 3;
+  width: clamp(220px, 23vw, 290px);
+}
+
+.search-box {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 12px 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+
+  &:focus-within {
+    border-color: #b3be97;
+    box-shadow: 0 0 0 3px rgb(179 190 151 / 20%);
+  }
+
+  > svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+  }
+
+  input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 13px;
+
+    &::placeholder {
+      color: var(--muted);
+    }
+  }
+
+  kbd {
+    flex: 0 0 auto;
+    padding: 3px 5px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--muted);
+    font: 11px tokens.$font-family-sans;
+    white-space: nowrap;
+  }
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--card);
+  box-shadow: 0 14px 36px rgb(33 48 39 / 14%);
+}
+
+.suggestion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover,
+  &.is-active {
+    background: var(--soft);
+  }
+
+  strong,
+  small {
+    display: block;
+  }
+
+  strong {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  small {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+}
+
+.suggestion-pin {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--soft);
+  color: var(--green);
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.suggestion-message {
+  margin: 0;
+  padding: 13px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}

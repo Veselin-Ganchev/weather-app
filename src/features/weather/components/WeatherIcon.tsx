@@ -16,22 +16,33 @@ function WeatherIcon({
   const isSnowy = snowyCodes.has(code)
   const isCloudy = code !== 0 && !foggyCodes.has(code)
   const isFoggy = foggyCodes.has(code)
+  const motionClass = isRainy
+    ? 'weather-icon--rain'
+    : isSnowy
+      ? 'weather-icon--snow'
+      : isFoggy
+        ? 'weather-icon--fog'
+        : isCloudy
+          ? 'weather-icon--cloud'
+          : isDay
+            ? 'weather-icon--sun'
+            : 'weather-icon--moon'
 
   return (
     <svg
       aria-hidden="true"
-      className={`weather-icon ${className}`}
+      className={`weather-icon ${motionClass} ${className}`}
       fill="none"
       viewBox="0 0 64 64"
     >
       {clearCodes.has(code) && isDay && (
-        <>
+        <g className="icon-sun-rays-group">
           <circle className="icon-sun" cx="30" cy="27" r="13" />
           <path
             className="icon-sun-rays"
             d="M30 4v5m0 36v5M7 27h5m36 0h5M14 11l4 4m25 25 4 4m0-33-4 4M18 39l-4 4"
           />
-        </>
+        </g>
       )}
       {isCloudy && (
         <path
@@ -40,7 +51,7 @@ function WeatherIcon({
         />
       )}
       {isFoggy && (
-        <path className="icon-cloud" d="M16 38h32M12 46h36M20 54h24" />
+        <path className="icon-fog" d="M16 38h32M12 46h36M20 54h24" />
       )}
       {isRainy && (
         <path className="icon-rain" d="m23 49-3 7m16-7-3 7m16-7-3 7" />

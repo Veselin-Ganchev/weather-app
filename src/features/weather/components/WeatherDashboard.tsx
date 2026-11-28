@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import MotionToggle from '../../../components/MotionToggle.tsx'
 import ThemeToggle from '../../../components/ThemeToggle.tsx'
 import { DEFAULT_LOCATION } from '../constants.ts'
 import useForecast from '../hooks/useForecast.ts'
@@ -21,6 +22,7 @@ import '../weather.scss'
 function WeatherDashboard() {
   const [location, setLocation] = useState<WeatherLocation>(DEFAULT_LOCATION)
   const [unit, setUnit] = useState<TemperatureUnit>('C')
+  const [isMotionPaused, setIsMotionPaused] = useState(false)
   const { forecast, error, isLoading, retry } = useForecast(location)
   const current = forecast?.current
   const hourlyForecast = getHourlyForecast(forecast)
@@ -38,7 +40,10 @@ function WeatherDashboard() {
   }
 
   return (
-    <div className="app-shell">
+    <div
+      className="app-shell"
+      data-motion-paused={isMotionPaused}
+    >
       <header className="topbar">
         <a aria-label="Daylight home" className="brand" href="/">
           <span aria-hidden="true" className="brand-mark">
@@ -81,6 +86,10 @@ function WeatherDashboard() {
 
       <footer className="app-footer">
         <span>Made for brighter days <span aria-hidden="true">✳</span></span>
+        <MotionToggle
+          isPaused={isMotionPaused}
+          onToggle={() => setIsMotionPaused((paused) => !paused)}
+        />
         <span>
           Weather data by{' '}
           <a href="https://open-meteo.com/" rel="noreferrer" target="_blank">
