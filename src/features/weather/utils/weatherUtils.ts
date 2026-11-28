@@ -1,7 +1,17 @@
 import type {
   ForecastResponse,
   HourlyForecastHour,
+  TemperatureUnit,
 } from '../types.ts'
+
+export function convertTemperature(
+  temperatureCelsius: number,
+  unit: TemperatureUnit,
+): number {
+  return Math.round(
+    unit === 'F' ? (temperatureCelsius * 9) / 5 + 32 : temperatureCelsius,
+  )
+}
 
 const weatherDescriptions: Record<number, string> = {
   0: 'Clear sky',

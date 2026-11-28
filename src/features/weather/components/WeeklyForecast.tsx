@@ -3,10 +3,17 @@ import {
   getTemperatureRangeStyle,
   getWeatherDescription,
 } from '../utils/weatherUtils.ts'
-import type { DailyForecastData } from '../types.ts'
+import type { DailyForecastData, TemperatureUnit } from '../types.ts'
 import WeatherIcon from './WeatherIcon.tsx'
+import { convertTemperature } from '../utils/weatherUtils.ts'
 
-function WeeklyForecast({ daily }: { daily: DailyForecastData | undefined }) {
+function WeeklyForecast({
+  daily,
+  unit,
+}: {
+  daily: DailyForecastData | undefined
+  unit: TemperatureUnit
+}) {
   return (
     <section aria-labelledby="week-title" className="forecast-section week-section">
       <div className="section-heading">
@@ -33,7 +40,7 @@ function WeeklyForecast({ daily }: { daily: DailyForecastData | undefined }) {
               aria-label={`${daily.temperature_2m_min[index]} to ${daily.temperature_2m_max[index]} degrees`}
               className="temperature-range"
             >
-              <span>{Math.round(daily.temperature_2m_min[index])}°</span>
+              <span>{convertTemperature(daily.temperature_2m_min[index], unit)}°</span>
               <i>
                 <b
                   style={getTemperatureRangeStyle(
@@ -42,7 +49,7 @@ function WeeklyForecast({ daily }: { daily: DailyForecastData | undefined }) {
                   )}
                 />
               </i>
-              <strong>{Math.round(daily.temperature_2m_max[index])}°</strong>
+              <strong>{convertTemperature(daily.temperature_2m_max[index], unit)}°</strong>
             </div>
           </article>
         ))}

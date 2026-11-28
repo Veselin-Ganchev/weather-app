@@ -1,7 +1,13 @@
 import { getWeatherDescription } from '../utils/weatherUtils.ts'
-import type { CurrentWeather, WeatherLocation } from '../types.ts'
+import type {
+  CurrentWeather,
+  TemperatureUnit,
+  WeatherLocation,
+} from '../types.ts'
 import LocationPinIcon from './LocationPinIcon.tsx'
 import WeatherIcon from './WeatherIcon.tsx'
+import WeatherLandscape from './WeatherLandscape.tsx'
+import { convertTemperature } from '../utils/weatherUtils.ts'
 
 function CurrentWeatherCard({
   location,
@@ -10,6 +16,7 @@ function CurrentWeatherCard({
   error,
   isLoading,
   onRetry,
+  unit = 'C',
 }: {
   location: WeatherLocation
   dateLabel: string
@@ -17,7 +24,14 @@ function CurrentWeatherCard({
   error: string
   isLoading: boolean
   onRetry: () => void
+  unit?: TemperatureUnit
 }) {
+  const temperature = current
+    ? convertTemperature(current.temperature_2m, unit)
+    : undefined
+  const feelsLike = current
+    ? convertTemperature(current.apparent_temperature, unit)
+    : undefined
   return (
     <section
       aria-label={`Weather in ${location.name}`}
@@ -40,7 +54,7 @@ function CurrentWeatherCard({
               {isLoading || !current ? (
                 <span aria-label="Loading temperature" className="temperature-skeleton" />
               ) : (
-                <span className="hero-temperature">{Math.round(current.temperature_2m)}°</span>
+                <span className="hero-temperature">{temperature}°</span>
               )}
               {current && (
                 <WeatherIcon
@@ -57,21 +71,14 @@ function CurrentWeatherCard({
             </p>
             <p className="feels-like">
               Feels like{' '}
-              {current ? `${Math.round(current.apparent_temperature)}°` : '—'}
+              {current ? `${feelsLike}°` : '—'}
             </p>
           </>
         )}
       </div>
 
       <div aria-hidden="true" className="hero-art">
-        <div className="sun-halo" />
-        <div className="sun-disc" />
-        <div className="cloud cloud-back" />
-        <div className="cloud cloud-front" />
-        <div className="hero-hill hill-back" />
-        <div className="hero-hill hill-front" />
-        <span className="art-sparkle sparkle-one">✳</span>
-        <span className="art-sparkle sparkle-two">✳</span>
+        <WeatherLandscape />
       </div>
       <div className="hero-footer">
         <span><span className="live-dot" /> Live weather</span>
